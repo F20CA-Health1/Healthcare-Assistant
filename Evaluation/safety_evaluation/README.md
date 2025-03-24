@@ -1,19 +1,11 @@
-# SafetyBench
-
-SafetyBench Is a Python package for evaluating model security performance. It provides a complete set of tools for evaluating the performance of large language models on security-related issues.
-
-## install 
-
-```bash
-pip install -e .
-```
+#Safety Evaluation
 
 ## usage
 
 ### 1. Initializes the evaluator
 
 ```python
-from safetybench.evaluation import Evaluator
+from safety_evaluation.evaluation import Evaluator
 
 # Initializes the evaluator 
 evaluator = BaichuanEvaluator(model_path="path/to/your/model")
@@ -55,7 +47,7 @@ evaluator.process_results(
 ### 5. Calculation evaluation index
 
 ```python
-from safetybench.evaluation import calculate_metrics
+from safety_evaluation.evaluation import calculate_metrics
 
 # Calculation evaluation index
 accuracy, f1 = calculate_metrics(
