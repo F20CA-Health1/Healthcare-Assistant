@@ -1,0 +1,6 @@
+2025-02-08 22:45:47,925 DEBUG open file: /home/hulei/.cache/huggingface/datasets/cais___mmlu/college_medicine/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe/dataset_info.json
+2025-02-08 22:45:47,945 DEBUG open file: /home/hulei/.cache/huggingface/datasets/cais___mmlu/college_medicine/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe/dataset_info.json
+2025-02-08 22:45:47,959 INFO evaluating all
+2025-02-08 22:46:09,691 INFO 173size batch costing time: 21.430336952209473
+2025-02-08 22:46:09,705 INFO this batch accu is: 0.6763005780346821, corr: 117.0, wrong: 56.0
+

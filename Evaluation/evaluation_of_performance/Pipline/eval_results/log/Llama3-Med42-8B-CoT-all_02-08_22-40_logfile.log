@@ -1,0 +1,4 @@
+2025-02-08 22:40:50,238 WARNING Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub
+2025-02-08 22:40:50,240 WARNING Found the latest cached dataset configuration 'professional_medicine' at /home/hulei/.cache/huggingface/datasets/cais___mmlu/professional_medicine/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Sat Feb  8 22:20:30 2025).
+2025-02-08 22:40:50,242 DEBUG open file: /home/hulei/.cache/huggingface/datasets/cais___mmlu/professional_medicine/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe/dataset_info.json
+2025-02-08 22:40:50,269 INFO evaluating all
