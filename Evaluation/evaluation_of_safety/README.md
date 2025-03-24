@@ -10,31 +10,31 @@ pip install -e .
 
 ## usage
 
-### 1. 初始化评估器
+### 1. Initializes the evaluator
 
 ```python
 from safetybench.evaluation import Evaluator
 
-# 初始化评估器  
+# Initializes the evaluator 
 evaluator = BaichuanEvaluator(model_path="path/to/your/model")
 ```
 
-### 2. 构建评估提示
+### 2. Build evaluation tips
 
 ```python
-# 构建评估提示
+# Build evaluation tips
 evaluator.construct_prompts(
     data_path="path/to/test/data.json",
     output_path="path/to/output/prompts.json",
-    is_english=False,  # 中文数据设置为False
-    zero_shot=True,    # 零样本评估设置为True
+    is_english=False, 
+    zero_shot=True, 
 )
 ```
 
-### 3. 生成模型回答
+### 3. Generative model answer
 
 ```python
-# 生成模型回答
+# Generative model answer
 evaluator.generate(
     prompt_path="path/to/prompts.json",
     output_path="path/to/output/results.jsonl",
@@ -42,22 +42,22 @@ evaluator.generate(
 )
 ```
 
-### 4. 处理结果
+### 4. result of handling
 
 ```python
-# 处理模型输出结果
+# Process model output results
 evaluator.process_results(
     input_path="path/to/results.jsonl",
     output_path="path/to/processed/results.json"
 )
 ```
 
-### 5. 计算评估指标
+### 5. Calculation evaluation index
 
 ```python
 from safetybench.evaluation import calculate_metrics
 
-# 计算评估指标
+# Calculation evaluation index
 accuracy, f1 = calculate_metrics(
     true_labels_path="path/to/true/labels.json",
     predictions_path="path/to/predictions.jsonl"
@@ -66,11 +66,6 @@ print(f"Accuracy: {accuracy:.2f}")
 print(f"F1 Score: {f1:.2f}")
 ```
 
-## 注意事项
-
-1. 确保模型路径正确且模型文件完整
-2. 数据文件格式需符合要求
-3. 建议使用Python 3.7或更高版本
 
 <div align="center">
 <img src="figs/cover.png" alt="SafetyBench" width="85%" />
