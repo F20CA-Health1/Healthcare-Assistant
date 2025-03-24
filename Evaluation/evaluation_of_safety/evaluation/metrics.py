@@ -16,16 +16,17 @@ def calculate_metrics(true_labels_path: str, predictions_path: str) -> Tuple[flo
     # Read the true labels
     true_labels = []
     with open(true_labels_path, 'r') as f:
-        data = json.load(f)
-        for value in data.values():
-            true_labels.append("(" + chr(65 + value) + ")")  # 0->A, 1->B, 2->C, 3->D
+        pred_data = json.load(f)
+        for value in pred_data.values():
+            predictions.append(value)
 
     # Read the predictions
     predictions = []
     with open(predictions_path, 'r') as f:
-        for line in f:
-            item = json.loads(line.strip())
-            predictions.append(item['origin_pred'])
+        dev_data = json.load(f)
+        for category in dev_data.values():
+            for item in category:
+                true_labels.append(item['answer'])
 
     # Calculate the index
     accuracy = accuracy_score(true_labels, predictions)
