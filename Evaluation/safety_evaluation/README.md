@@ -64,14 +64,4 @@ accuracy, f1 = calculate_metrics(
 )
 print(f"Accuracy: {accuracy:.2f}")
 print(f"F1 Score: {f1:.2f}")
-```
-
-
-<div align="center">
-<img src="figs/cover.png" alt="SafetyBench" width="85%" />
-</div>
-
-<p align="center">
-   🌐 <a href="https://llmbench.ai/safety" target="_blank">Website</a> • 🤗 <a href="https://huggingface.co/datasets/thu-coai/SafetyBench" target="_blank">Hugging Face</a> • ⏬ <a href="#data" target="_blank">Data</a> •   📃 <a href="https://arxiv.org/abs/2309.07045" target="_blank">Paper</a>
-</p>
 
