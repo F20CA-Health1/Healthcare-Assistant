@@ -9,7 +9,7 @@ cd scripts/examples/
 sh eval_med42_8b.sh
 ```
 
-## 🏆 Mini-Healthcare-Leaderboard
+## 🏆 Benchmarking
 | Model           | MMLU-PRO | MMLU-college_medicine | MMLU-professional_medicine |
 | :-------------- | :------- | :----- | :----- |
 | Llama3-Med42-8B | 0.529    | 0.790  | 0.676  |
