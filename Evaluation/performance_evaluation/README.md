@@ -2,20 +2,24 @@
 
 ## Evaluation
 
-To run local inference, modify the model name in the following script and execute it:
+To run local inference, modify the model name in eval.sh file and execute it:
 
 ```bash
-cd scripts/examples/
-sh eval_med42_8b.sh
+cd pipline/scripts/examples/
+sh eval.sh
 ```
 
-## 🏆 Benchmarking
-| Model           | MMLU-PRO | MMLU-college_medicine | MMLU-professional_medicine |
-| :-------------- | :------- | :----- | :----- |
-| Llama3-Med42-8B | 0.529    | 0.790  | 0.676  |
+## Results of Performance Evaluation
+| Model           | MMLU-PRO | MMLU College Medicine | MMLU Professional Medicine |PubMedQA |
+| :-------------- | :------- | :----- | :----- |:----- |
+| Llama3-8B | 48.24 | 72.89 | 62.89  | 61.64 |
+| Llama3-8B-RAG | 50.36 |  74.78 |  64.79  |  62.04  |
+| Llama3-Med42-8B | 52.9 |  79.10 |  67.6 |  62.84  |
 
-## Benchmarking Answer Extraction
-We provide different alternatives to do answer extraction. We found that different answer extraction mechanisms have minor impact on the results.
+## Benchmarking
+
+Get the benchmarking results:
+
 ```
 python compute_accuracy.py results/med42_8b-quantized/CoT/all/
 ```

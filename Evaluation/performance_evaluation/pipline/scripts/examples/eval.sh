@@ -3,6 +3,7 @@
 save_dir="eval_results/"
 global_record_file="eval_results/eval_record_collection.csv"
 model="m42-health/Llama3-Med42-8B"
+
 selected_subjects="all"
 gpu_util=0.8
 

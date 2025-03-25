@@ -1,8 +1,0 @@
-2025-02-08 21:42:52,294 DEBUG open file: /home/hulei/.cache/huggingface/datasets/TIGER-Lab___mmlu-pro/default/0.0.0/014c8cf520218fc7f1ecec95c691a83ae5b8ba14/dataset_info.json
-2025-02-08 21:42:52,316 DEBUG open file: /home/hulei/.cache/huggingface/datasets/TIGER-Lab___mmlu-pro/default/0.0.0/014c8cf520218fc7f1ecec95c691a83ae5b8ba14/dataset_info.json
-2025-02-08 21:42:53,070 INFO selected subjects:
-health
-2025-02-08 21:42:53,072 INFO evaluating health
-2025-02-08 21:45:50,749 INFO 818size batch costing time: 175.70973324775696
-2025-02-08 21:45:50,800 INFO this batch accu is: 0.5293398533007335, corr: 433.0, wrong: 385.0
-

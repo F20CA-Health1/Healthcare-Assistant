@@ -1,3 +1,0 @@
-
-------average acc sta------
-Average accuracy: 0.7904
