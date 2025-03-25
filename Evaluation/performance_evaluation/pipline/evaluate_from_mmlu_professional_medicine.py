@@ -19,8 +19,8 @@ max_new_tokens = 2048
 
 
 def load_mmlu():
-    dataset = load_dataset("cais/mmlu", 'college_medicine')
-    # dataset = load_dataset("cais/mmlu", 'professional_medicine')
+    # dataset = load_dataset("cais/mmlu", 'college_medicine')
+    dataset = load_dataset("cais/mmlu", 'professional_medicine')
     test_df = list(dataset["test"])
     val_df = list(dataset["validation"])
     return test_df, val_df
@@ -236,5 +236,6 @@ if __name__ == "__main__":
                                   logging.StreamHandler(sys.stdout)])
 
     main()
+
 
 
