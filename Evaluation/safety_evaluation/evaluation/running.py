@@ -1,10 +1,10 @@
 import argparse
-from safety_evaluation.evaluation import Evaluator
+from evaluator import Evaluator
+from metrics import calculate_metrics
 
 def parse_args():
     parser = argparse.ArgumentParser(description='safety')
     
-    # 添加模型路径参数
     parser.add_argument('--model_path', type=str, required=True,
                       help='model path')
     return parser.parse_args()
@@ -35,13 +35,13 @@ def main():
         input_path="..\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\results.jsonl",
         output_path="..\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\processed_results.json"
     )
+    # Calculation evaluation index
+    accuracy, f1 = calculate_metrics(
+        true_labels_path="..\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\answers.json",
+        predictions_path="..\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\processed_results.json"
+    )
+    print(f"Accuracy: {accuracy:.2f}")
+    print(f"F1 Score: {f1:.2f}")
 
-from safety_evaluation.evaluation import calculate_metrics
-
-# Calculation evaluation index
-accuracy, f1 = calculate_metrics(
-    true_labels_path="..\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\answers.json",
-    predictions_path="..\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\processed_results.json"
-)
-print(f"Accuracy: {accuracy:.2f}")
-print(f"F1 Score: {f1:.2f}")
+if __name__ == "__main__":
+    main()
