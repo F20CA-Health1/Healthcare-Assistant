@@ -1,8 +1,6 @@
 import csv
 import json
 import argparse
-import os
-from RAG.RAGComponent import RAGModule
 import torch
 import random
 import transformers
@@ -13,6 +11,11 @@ from tqdm import tqdm
 import logging
 import sys
 from datasets import load_dataset
+
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+from RAG.RAGComponent import RAGModule
 
 choices = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"]
 max_model_length = 4096
