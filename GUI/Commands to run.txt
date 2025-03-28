@@ -13,5 +13,5 @@ pip install groq
 
 pip install git+https://github.com/openai/whisper.git (and update through pip install --upgrade --no-deps --force-reinstall git+https://github.com/openai/whisper.git)
 panel serve healthApp.py --dev
-Command to run:
+Command to run (Make sure to cd into the GUI folder before running this command in terminal):
 panel serve healthApp.py --static-dirs assets=./assets
