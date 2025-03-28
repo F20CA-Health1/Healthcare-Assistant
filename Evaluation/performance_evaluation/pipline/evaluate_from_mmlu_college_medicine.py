@@ -12,6 +12,7 @@ from tqdm import tqdm
 import logging
 import sys
 from datasets import load_dataset
+import pandas as pd
 
 from multiprocessing.spawn import prepare
 from typing import Generator
@@ -68,6 +69,12 @@ choices = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
 max_model_length = 4096
 max_new_tokens = 2048
 rag_module = RAGModule('./data')
+df = pd.read_json('./RAG/nhs_illnesses_structured.json', orient='index')
+for _, row in df.iterrows():
+    page = row['whole_page']
+    title = row['title']
+    rag_module.add_to_datastore(page, title)
+    print(f'Added: {title}')
 
 def load_mmlu():
     dataset = load_dataset("cais/mmlu", 'college_medicine')
