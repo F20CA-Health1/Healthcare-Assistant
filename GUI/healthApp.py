@@ -32,10 +32,14 @@ from openai import AzureOpenAI
 def get_response(contents, user, instance):
     # contents = The contents of the user sent message
     # response = The response to be sent back to the user
-    if isRag:
+    if isRag and isLocal:
         response = "Replace this with your RAG response."
+    elif isRag and not isLocal:
+        response = "Replace this with your RAG response with a non local model."
+    elif isLocal:
+        response = "Replace this with your online model response."
     else:
-        response = "Replace this with your normal response."
+        response = "Replace this with your local model response."
     
     if isNarrator:
         tts.text_to_speech(response)
