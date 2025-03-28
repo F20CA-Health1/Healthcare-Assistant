@@ -13,6 +13,8 @@ import logging
 import sys
 from datasets import load_dataset
 import pandas as pd
+import weave
+import wandb
 
 from multiprocessing.spawn import prepare
 from typing import Generator
@@ -186,6 +188,7 @@ def batch_inference(llm, sampling_params, inference_batch):
     return pred_batch, response_batch
 
 
+
 def save_res(res, output_path):
     accu, corr, wrong = 0.0, 0.0, 0.0
     with open(output_path, "w") as fo:
@@ -235,6 +238,7 @@ def eval_cot(subject, model, tokenizer, val_df, test_df, output_path):
     for j, curr in enumerate(test_df):
         curr["pred"] = pred_batch[j]
         curr["model_outputs"] = response_batch[j]
+        track_in_weave(curr)
         res.append(curr)
     accu, corr, wrong = save_res(res, output_path)
     logging.info("this batch accu is: {}, corr: {}, wrong: {}\n".format(str(accu), str(corr), str(wrong)))
@@ -242,6 +246,13 @@ def eval_cot(subject, model, tokenizer, val_df, test_df, output_path):
     accu, corr, wrong = save_res(res, output_path)
     return accu, corr, wrong
 
+key = "185d1613d5b191d592d6616e996a6b20b068d7f4"
+wandb.login(key=key)
+weave.init('mmlu_college_medicine')
+
+@weave.op
+def track_in_weave(curr):
+    pass
 
 def main():
     model, tokenizer = load_model()
