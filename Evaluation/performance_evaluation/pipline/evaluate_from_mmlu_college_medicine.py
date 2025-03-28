@@ -2,7 +2,6 @@ import csv
 import json
 import argparse
 import os
-from RAG.RAGComponent import RAGModule
 import torch
 import random
 import transformers
@@ -53,7 +52,7 @@ def select_by_category(df, subject):
     return df
 
 
-def format_cot_example(example, including_answer=True, *, rag_enabled = False):
+def format_cot_example(example, including_answer=True):
     prompt = "Question:\n"
     question = example["question"]
     options = [
@@ -71,16 +70,12 @@ def format_cot_example(example, including_answer=True, *, rag_enabled = False):
         prompt += f"Answer: Let's think step by step.\nTherefore, the answer is {answer}.\n\n"
     else:
         prompt += "Answer: Let's think step by step."
-    
-    if rag_enabled:
-        rag_module = RAGModule('./data')
-        prompt = rag_module.prepare_prompt(prompt)
     return prompt
 
 
-def generate_cot_prompt(val_df, curr, k, *, rag_enabled = False):
+def generate_cot_prompt(val_df, curr, k):
     prompt = ""
-    with open("cot_prompt_lib/initial_prompt.txt", "r") as fi:
+    with open(f"cot_prompt_lib/initial_prompt.txt", "r") as fi:
         for line in fi.readlines():
             prompt += line
     
@@ -88,10 +83,6 @@ def generate_cot_prompt(val_df, curr, k, *, rag_enabled = False):
     for example in val_examples:
         prompt += format_cot_example(example, including_answer=True)
     prompt += format_cot_example(curr, including_answer=False)
-    
-    if rag_enabled:
-        rag_module = RAGModule('./data')
-        prompt = rag_module.prepare_prompt(prompt)
     return prompt
 
 
