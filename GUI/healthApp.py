@@ -8,8 +8,8 @@ import numpy as np
 import openai as op
 import pygame as pg
 import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../TTS')))
-import tts as tts
+import TTS as tts
+from RAG.RAGComponent import RAGModule
 
 
 import sounddevice as sd
@@ -23,6 +23,7 @@ isLocal = True
 isRag = True
 isNarrator = True
 audio_queue = queue.Queue()
+rag_module = RAGModule('./data')
 
 from openai import AzureOpenAI
 
@@ -33,8 +34,10 @@ def get_response(contents, user, instance):
     # contents = The contents of the user sent message
     # response = The response to be sent back to the user
     if isRag and isLocal:
+        contents = rag_module.prepare_prompt(contents)
         response = "Replace this with your RAG response."
     elif isRag and not isLocal:
+        contents = rag_module.prepare_prompt(contents)
         response = "Replace this with your RAG response with a non local model."
     elif isLocal:
         response = "Replace this with your online model response."
