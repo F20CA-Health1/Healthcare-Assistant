@@ -99,7 +99,7 @@ def format_cot_example(example, including_answer=True):
         prompt += cot_content + "\n\n"
     else:
         prompt += "Answer: Let's think step by step."
-        prompt = rag.prepare_prompt(prompt) # 修改部分
+        # prompt = rag.prepare_prompt(prompt) # 修改部分
     return prompt
 
 
