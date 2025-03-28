@@ -1,3 +1,4 @@
+from multiprocessing.spawn import prepare
 from typing import Generator
 from chromadb import PersistentClient, Collection
 
@@ -6,6 +7,8 @@ class RAGModule():
         COLLECTION_NAME = 'nhs_illnesses'
         self.collection = self.initialise_db(path, COLLECTION_NAME)
         self.next_id = self.next_id_generator()
+
+        self.user_template = """QUESTION:\n{}\nCONTEXT:\n{}\n"""
 
     def initialise_db(self, path: str, collection_name: str):
         """
@@ -34,10 +37,10 @@ class RAGModule():
         documents = self.collection.query(query_texts=query, n_results=num_retrievals).get("documents", [[]]) # Extract documents from our query
         return "\n".join(documents[0]) # Only return first batch results (single query)
 
-    def prepare_prompt(self):
-        while True:
-            inp = input('> ')
-            print(self.get_context(inp))
+    def prepare_prompt(self, user_input: str) -> str:
+        context = self.get_context(user_input, 1)
+
+        return self.user_template.format(user_input, context)
 
     def add_docs(self):
         while True:
@@ -48,4 +51,6 @@ class RAGModule():
 
 if __name__ == "__main__":
     RAG = RAGModule('./data')
-    RAG.prepare_prompt()
+    while True:
+        user_input = input('> ')
+        print(RAG.prepare_prompt(user_input))
