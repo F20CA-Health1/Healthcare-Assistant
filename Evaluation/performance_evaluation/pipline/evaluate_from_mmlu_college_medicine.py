@@ -12,11 +12,12 @@ from tqdm import tqdm
 import logging
 import sys
 from datasets import load_dataset
+from RAG.RAGComponent import RAGModule
 
 choices = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"]
 max_model_length = 4096
 max_new_tokens = 2048
-
+rag_module = RAGModule('./data')
 
 def load_mmlu():
     dataset = load_dataset("cais/mmlu", 'college_medicine')
@@ -70,6 +71,7 @@ def format_cot_example(example, including_answer=True):
         prompt += f"Answer: Let's think step by step.\nTherefore, the answer is {answer}.\n\n"
     else:
         prompt += "Answer: Let's think step by step."
+    prompt = rag_module.prepare_prompt(prompt)
     return prompt
 
 
