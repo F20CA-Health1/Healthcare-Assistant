@@ -13,6 +13,7 @@ dependencies = [
     "pandas>=2.2.3",
     "panel>=1.6.2",
     "pyaudio>=0.2.14",
+    "pydantic-ai>=0.0.46",
     "pydub>=0.25.1",
     "pygame>=2.6.1",
     "scipy>=1.15.2",
