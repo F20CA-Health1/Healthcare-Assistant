@@ -1,29 +1,40 @@
+import argparse
 from safety_evaluation.evaluation import Evaluator
 
-# Initializes the evaluator 
-evaluator = Evaluator(model_path="path/to/your/model")
+def parse_args():
+    parser = argparse.ArgumentParser(description='safety')
+    
+    # 添加模型路径参数
+    parser.add_argument('--model_path', type=str, required=True,
+                      help='model path')
+    return parser.parse_args()
 
-# Build evaluation tips
-evaluator.construct_prompts(
-    data_path="\\wsl.localhost\Ubuntu\home\yyyzwyy\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\test_en.json",
-    output_path="\\wsl.localhost\Ubuntu\home\yyyzwyy\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\prompts.json",
-    shot_path="\\wsl.localhost\Ubuntu\home\yyyzwyy\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\dev_en.json",
-    is_english=False, 
-    zero_shot=False, 
-)
+def main():
+    args = parse_args()
+    # Initializes the evaluator 
+    evaluator = Evaluator(args.model_path)
 
-# Generative model answer
-evaluator.generate(
-    prompt_path="\\wsl.localhost\Ubuntu\home\yyyzwyy\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\prompts.json",
-    output_path="\\wsl.localhost\Ubuntu\home\yyyzwyy\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\results.jsonl",
-    batch_size=1
-)
+    # Build evaluation tips
+    evaluator.construct_prompts(
+        data_path="\\wsl.localhost\Ubuntu\home\yyyzwyy\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\test_en.json",
+        output_path="\\wsl.localhost\Ubuntu\home\yyyzwyy\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\prompts.json",
+        shot_path="\\wsl.localhost\Ubuntu\home\yyyzwyy\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\dev_en.json",
+        is_english=True, 
+        zero_shot=False, 
+    )
 
-# Process model output results
-evaluator.process_results(
-    input_path="\\wsl.localhost\Ubuntu\home\yyyzwyy\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\results.jsonl",
-    output_path="\\wsl.localhost\Ubuntu\home\yyyzwyy\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\processed_results.json"
-)
+    # Generative model answer
+    evaluator.generate(
+        prompt_path="\\wsl.localhost\Ubuntu\home\yyyzwyy\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\prompts.json",
+        output_path="\\wsl.localhost\Ubuntu\home\yyyzwyy\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\results.jsonl",
+        batch_size=1
+    )
+
+    # Process model output results
+    evaluator.process_results(
+        input_path="\\wsl.localhost\Ubuntu\home\yyyzwyy\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\results.jsonl",
+        output_path="\\wsl.localhost\Ubuntu\home\yyyzwyy\Evaluation\safety_evaluation\Medical Safety Benchmarking Dataset\processed_results.json"
+    )
 
 from safety_evaluation.evaluation import calculate_metrics
 
