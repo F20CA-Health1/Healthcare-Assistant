@@ -66,8 +66,8 @@ class RAGModule():
             self.add_to_datastore(doc, doc)
 
 choices = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"]
-max_model_length = 4096
-max_new_tokens = 2048
+max_model_length = 10512
+max_new_tokens = 10512
 rag_module = RAGModule('./data')
 df = pd.read_json('./nhs_illnesses_structured.json', orient='index')
 for _, row in df.iterrows():
