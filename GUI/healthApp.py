@@ -8,8 +8,10 @@ import numpy as np
 import openai as op
 import pygame as pg
 import sys
-import TTS as tts
-from RAG.RAGComponent import RAGModule
+sys.path.append('./TTS')
+sys.path.append('./RAG')
+import tts as tts
+from RAGComponent import RAGModule
 
 
 import sounddevice as sd
@@ -21,7 +23,7 @@ stream = None
 is_recording = False
 isLocal = True
 isRag = True
-isNarrator = True
+isNarrator = False
 audio_queue = queue.Queue()
 rag_module = RAGModule('./data')
 
@@ -117,7 +119,7 @@ def stop_recording(instance):
     wav.write(pcm_filename, sd.default.samplerate, (myrecording2 / np.max(np.abs(myrecording2)) * 2147483647).astype(np.int32))
     # wav.write(pcm_filename, sd.default.samplerate, (myrecording2 / np.max(np.abs(myrecording2)) * 32767).astype(np.int16))
 
-    AUDIO_FILE = path.join(path.dirname(path.realpath(__file__)), pcm_filename)
+    AUDIO_FILE = pcm_filename
     print(AUDIO_FILE)
     r = sr.Recognizer()
     with sr.AudioFile(AUDIO_FILE) as source:
