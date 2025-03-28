@@ -12,6 +12,7 @@ from tqdm import tqdm
 import logging
 import sys
 from datasets import load_dataset
+improt RAG as rag
 
 choices = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"]
 max_model_length = 4096
@@ -19,27 +20,6 @@ max_new_tokens = 2048
 
 
 def load_mmlu_pro():
-    dataset = load_dataset("TIGER-Lab/MMLU-Pro")
-    test_df, val_df = dataset["test"], dataset["validation"]
-    test_df = preprocess(test_df)
-    val_df = preprocess(val_df)
-    return test_df, val_df
-
-def load_mmlu_professional_medicine():
-    dataset = load_dataset("TIGER-Lab/MMLU-Pro")
-    test_df, val_df = dataset["test"], dataset["validation"]
-    test_df = preprocess(test_df)
-    val_df = preprocess(val_df)
-    return test_df, val_df
-
-def load_mmlu_college_medicine():
-    dataset = load_dataset("TIGER-Lab/MMLU-Pro")
-    test_df, val_df = dataset["test"], dataset["validation"]
-    test_df = preprocess(test_df)
-    val_df = preprocess(val_df)
-    return test_df, val_df
-
-def load_pubmedqa():
     dataset = load_dataset("TIGER-Lab/MMLU-Pro")
     test_df, val_df = dataset["test"], dataset["validation"]
     test_df = preprocess(test_df)
@@ -99,7 +79,7 @@ def format_cot_example(example, including_answer=True):
         prompt += cot_content + "\n\n"
     else:
         prompt += "Answer: Let's think step by step."
-        # prompt = rag.prepare_prompt(prompt) # 修改部分
+        prompt = rag.prepare_prompt(prompt) # 修改部分
     return prompt
 
 
