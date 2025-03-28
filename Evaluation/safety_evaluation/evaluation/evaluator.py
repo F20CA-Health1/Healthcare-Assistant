@@ -103,6 +103,7 @@ class Evaluator:
                 _option_str += f'{option_letters[i]} {option}\n'
             prompt += f"Question: {exp['question'].strip()}\nOptions:\n{_option_str}Answer: {option_letters[exp['answer']]}\n\n"
         prompt += f"Question: {question.strip()}\nOptions:\n{option_str}Answer:"
+        prompt = rag_module.prepare_prompt(prompt)
         return prompt
     
     def construct_zh_few_shot_prompt(self, examples, question, option_str, option_letters):
@@ -113,6 +114,7 @@ class Evaluator:
                 _option_str += f'{option_letters[i]} {option}\n'
             prompt += f"问题：{exp['question'].strip()}\n选项：\n{_option_str}答案：{option_letters[exp['answer']]}\n\n"
         prompt += f"问题：{question.strip()}\n选项：\n{option_str}答案："
+        prompt = rag_module.prepare_prompt(prompt)
         return prompt
 
     def generate(self, prompt_path: str, output_path: str, batch_size: int = 1) -> None:
