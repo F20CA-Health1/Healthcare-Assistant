@@ -6,6 +6,10 @@ from time import sleep
 import speech_recognition as sr
 import numpy as np
 import openai as op
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../TTS')))
+import tts as tts
+
 
 import sounddevice as sd
 import scipy.io.wavfile as wav
@@ -16,9 +20,11 @@ stream = None
 is_recording = False
 isLocal = True
 isRag = True
+isNarrator = True
 audio_queue = queue.Queue()
 
 from openai import AzureOpenAI
+
 
 
 # Function that can deal with the response from the chat bot
@@ -29,6 +35,10 @@ def get_response(contents, user, instance):
         response = "Replace this with your RAG response."
     else:
         response = "Replace this with your normal response."
+    
+    if isNarrator:
+        tts.text_to_speech(response)
+    
     for index in range(len(response)):
         yield response[0:index+1]
         sleep(0.03)
@@ -159,6 +169,13 @@ def rag_mode(value):
     else:
         isRag = False
         print("RAG mode disabled.")
+
+def narrator_mode(value):
+    global isNarrator
+    if value.new:
+        isNarrator = True
+    else:
+        isNarrator = False
     
 button2 = pn.widgets.Button(name="≡")
 button = pn.widgets.Button(name="🎤")
@@ -168,7 +185,8 @@ switch = pn.widgets.Switch(name="RAG Record", value=True)
 switch.param.watch(rag_mode, 'value', onlychanged=True)
 switch2 = pn.widgets.Switch(name="Local", value=True)
 switch2.param.watch(local_mode, 'value', onlychanged=True)
-switch3 = pn.widgets.Switch(name="Narrator", value=True)
+switch3 = pn.widgets.Switch(name="Narrator", value=False)
+switch3.param.watch(narrator_mode, 'value', onlychanged=True)
 button.button_type = "primary"
 button.on_click(test)
 button2.on_click(toggle_sidebar)
