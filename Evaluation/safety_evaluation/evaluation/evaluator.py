@@ -20,17 +20,11 @@ class Evaluator:
         
     def init_model(self):
         """Initialize the model and tokenizer"""
-        if not os.path.exists(self.model_path):
-            raise ValueError(f"The model path does not exist: {self.model_path}")
             
         self.tokenizer = AutoTokenizer.from_pretrained(
             self.model_path,
-            use_fast=False, 
             trust_remote_code=True
         )
-        
-        if self.tokenizer.pad_token is None:
-            self.tokenizer.pad_token = self.tokenizer.eos_token
             
         self.model = AutoModelForCausalLM.from_pretrained(
             self.model_path,

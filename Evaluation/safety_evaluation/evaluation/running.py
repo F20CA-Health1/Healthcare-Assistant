@@ -12,9 +12,9 @@ def parse_args():
     return parser.parse_args()
 
 def main():
-#    args = parse_args()
+    args = parse_args()
     # Initializes the evaluator 
-    evaluator = Evaluator(model_path="Evaluation\safety_evaluation\llama3-med42-8B")
+    evaluator = Evaluator(model_path=args.model_path)
 
     # Build evaluation tips
     evaluator.construct_prompts(
