@@ -8,7 +8,7 @@
 from safety_evaluation.evaluation import Evaluator
 
 # Initializes the evaluator 
-evaluator = BaichuanEvaluator(model_path="path/to/your/model")
+evaluator = Evaluator(model_path="path/to/your/model")
 ```
 
 ### 2. Build evaluation tips
