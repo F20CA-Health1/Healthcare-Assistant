@@ -167,17 +167,19 @@ def text_to_speech(text, lang='en', output_dir=".", speed=1.2, play_audio=True, 
     """Convert text to speech using gTTS, save as an audio file, and play it."""
     try:
         timestamp = time.strftime("%Y%m%d_%H%M%S")
+        print("Hi")
         output_file = os.path.join(output_dir, f"tts_{lang}_{timestamp}.{file_format}")
+        
 
         # Generate speech
         tts = gTTS(text=text, lang=lang, slow=False)
         tts.save(output_file)
-
+        print("DO")
         # Modify playback speed using pydub
-        if speed != 1.0:
-            audio = AudioSegment.from_file(output_file)
-            audio = audio.speedup(playback_speed=speed)
-            audio.export(output_file, format=file_format)
+        #if speed != 1.0:
+            #audio = AudioSegment.from_file(output_file)
+           # audio = audio.speedup(playback_speed=speed)
+            #audio.export(output_file, format=file_format)
 
         print(f"[INFO] Audio file saved: {output_file}")
 
