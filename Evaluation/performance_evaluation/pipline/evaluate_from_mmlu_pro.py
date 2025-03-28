@@ -25,20 +25,6 @@ def load_mmlu_pro():
     val_df = preprocess(val_df)
     return test_df, val_df
 
-def load_mmlu_professional_medicine():
-    dataset = load_dataset("TIGER-Lab/MMLU-Pro")
-    test_df, val_df = dataset["test"], dataset["validation"]
-    test_df = preprocess(test_df)
-    val_df = preprocess(val_df)
-    return test_df, val_df
-
-def load_mmlu_college_medicine():
-    dataset = load_dataset("TIGER-Lab/MMLU-Pro")
-    test_df, val_df = dataset["test"], dataset["validation"]
-    test_df = preprocess(test_df)
-    val_df = preprocess(val_df)
-    return test_df, val_df
-
 def load_pubmedqa():
     dataset = load_dataset("TIGER-Lab/MMLU-Pro")
     test_df, val_df = dataset["test"], dataset["validation"]
