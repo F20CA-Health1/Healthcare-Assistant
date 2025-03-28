@@ -69,7 +69,7 @@ choices = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
 max_model_length = 4096
 max_new_tokens = 2048
 rag_module = RAGModule('./data')
-df = pd.read_json('./RAG/nhs_illnesses_structured.json', orient='index')
+df = pd.read_json('./nhs_illnesses_structured.json', orient='index')
 for _, row in df.iterrows():
     page = row['whole_page']
     title = row['title']
