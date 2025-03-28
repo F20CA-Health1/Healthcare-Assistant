@@ -1,6 +1,3 @@
-# Evaluation
+The test file is the dataset for evaluation. 
 
-Evluation section can be divided into two sections:
-
-- Safety evaluation 
-- Performace evaluation
+The dev is the shot file that can generate the prompts for each type of the questions.
