@@ -3,7 +3,7 @@ from chromadb import PersistentClient, Collection
 
 class RAGModule():
     def __init__(self, path: str):
-        COLLECTION_NAME = 'test_collection'
+        COLLECTION_NAME = 'nhs_illnesses'
         self.collection = self.initialise_db(path, COLLECTION_NAME)
         self.next_id = self.next_id_generator()
 
