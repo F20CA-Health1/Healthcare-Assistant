@@ -2,20 +2,20 @@ import json
 import numpy as np
 import os
 import torch
-from RAG.RAGComponent import RAGModule
 from transformers import AutoTokenizer, AutoModelForCausalLM, GenerationConfig
 from tqdm import tqdm, trange
 from random import seed, choice
 from typing import List, Dict, Optional
-rag_module = RAGModule('./data')
+
 class Evaluator:
-    def __init__(self, model_path: str):
+    def __init__(self, model_path: str, use_auth_token: bool = True):
         """Initialize the evaluator
         
         Args:
             model_path: The local path of the model
         """
         self.model_path = model_path
+        self.use_auth_token = use_auth_token
         self.init_model()
         
     def init_model(self):
@@ -88,7 +88,7 @@ class Evaluator:
                     prompt = self.construct_en_few_shot_prompt(examples, question, option_str, option_letters)
                 else:
                     prompt = self.construct_zh_few_shot_prompt(examples, question, option_str, option_letters)
-            prompt = rag_module.prepare_prompt(prompt)
+
             d['prompt'] = prompt
             res.append(d)
 
@@ -103,7 +103,6 @@ class Evaluator:
                 _option_str += f'{option_letters[i]} {option}\n'
             prompt += f"Question: {exp['question'].strip()}\nOptions:\n{_option_str}Answer: {option_letters[exp['answer']]}\n\n"
         prompt += f"Question: {question.strip()}\nOptions:\n{option_str}Answer:"
-        prompt = rag_module.prepare_prompt(prompt)
         return prompt
     
     def construct_zh_few_shot_prompt(self, examples, question, option_str, option_letters):
@@ -114,7 +113,6 @@ class Evaluator:
                 _option_str += f'{option_letters[i]} {option}\n'
             prompt += f"问题：{exp['question'].strip()}\n选项：\n{_option_str}答案：{option_letters[exp['answer']]}\n\n"
         prompt += f"问题：{question.strip()}\n选项：\n{option_str}答案："
-        prompt = rag_module.prepare_prompt(prompt)
         return prompt
 
     def generate(self, prompt_path: str, output_path: str, batch_size: int = 1) -> None:
