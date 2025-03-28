@@ -2,6 +2,7 @@ import csv
 import json
 import argparse
 import os
+from RAG.RAGComponent import RAGModule
 import torch
 import random
 import transformers
@@ -12,11 +13,13 @@ from tqdm import tqdm
 import logging
 import sys
 from datasets import load_dataset
-improt RAG as rag
 
 choices = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"]
 max_model_length = 4096
 max_new_tokens = 2048
+
+rag_module = RAGModule('./data')
+
 
 
 def load_mmlu_pro():
@@ -79,7 +82,7 @@ def format_cot_example(example, including_answer=True):
         prompt += cot_content + "\n\n"
     else:
         prompt += "Answer: Let's think step by step."
-        prompt = rag.prepare_prompt(prompt) # 修改部分
+    prompt = rag_module.prepare_prompt(prompt)
     return prompt
 
 
@@ -95,6 +98,7 @@ def generate_cot_prompt(val_df, curr, k):
     for example in val_df:
         prompt += format_cot_example(example, including_answer=True)
     prompt += format_cot_example(curr, including_answer=False)
+    prompt = rag_module.prepare_prompt(prompt)
     return prompt
 
 
