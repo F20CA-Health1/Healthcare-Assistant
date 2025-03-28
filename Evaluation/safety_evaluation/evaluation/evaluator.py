@@ -2,11 +2,12 @@ import json
 import numpy as np
 import os
 import torch
+from RAG.RAGComponent import RAGModule
 from transformers import AutoTokenizer, AutoModelForCausalLM, GenerationConfig
 from tqdm import tqdm, trange
 from random import seed, choice
 from typing import List, Dict, Optional
-
+rag_module = RAGModule('./data')
 class Evaluator:
     def __init__(self, model_path: str):
         """Initialize the evaluator
@@ -87,7 +88,7 @@ class Evaluator:
                     prompt = self.construct_en_few_shot_prompt(examples, question, option_str, option_letters)
                 else:
                     prompt = self.construct_zh_few_shot_prompt(examples, question, option_str, option_letters)
-
+            prompt = rag_module.prepare_prompt(prompt)
             d['prompt'] = prompt
             res.append(d)
 
