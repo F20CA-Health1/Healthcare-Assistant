@@ -4,10 +4,14 @@ pip install speechrecognition
 pip install sounddevice
 pip install panel
 pip install setuptools-rust
-pip install openai-whisper OR pip install git+https://github.com/openai/whisper.git (and update through pip install --upgrade --no-deps --force-reinstall git+https://github.com/openai/whisper.git)
+pip install openai-whisper 
+
 pip install soundfile
 pip install openai
 pip install groq
 
+
+pip install git+https://github.com/openai/whisper.git (and update through pip install --upgrade --no-deps --force-reinstall git+https://github.com/openai/whisper.git)
 panel serve healthApp.py --dev
+Command to run:
 panel serve healthApp.py --static-dirs assets=./assets

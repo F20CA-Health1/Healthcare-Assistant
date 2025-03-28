@@ -6,6 +6,7 @@ from time import sleep
 import speech_recognition as sr
 import numpy as np
 import openai as op
+import pygame as pg
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../TTS')))
 import tts as tts
@@ -38,6 +39,7 @@ def get_response(contents, user, instance):
     
     if isNarrator:
         tts.text_to_speech(response)
+        
     
     for index in range(len(response)):
         yield response[0:index+1]
