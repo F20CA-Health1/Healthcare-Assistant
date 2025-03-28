@@ -21,12 +21,14 @@ audio_queue = queue.Queue()
 from openai import AzureOpenAI
 
 
-
+# Function that can deal with the response from the chat bot
 def get_response(contents, user, instance):
-    if "turbine" in contents.lower():
-        response = "A wind turbine converts wind energy into electricity."
+    # contents = The contents of the user sent message
+    # response = The response to be sent back to the user
+    if isRag:
+        response = "Replace this with your RAG response."
     else:
-        response = "Sorry, I don't know."
+        response = "Replace this with your normal response."
     for index in range(len(response)):
         yield response[0:index+1]
         sleep(0.03)
@@ -57,7 +59,7 @@ def test(instance):
     stream.start()
     is_recording = True
     # wait until the user 
-    
+
     # sd.play(myrecording2, blocking=True)
     # sd.wait()
 
