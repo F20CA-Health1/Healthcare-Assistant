@@ -12,6 +12,7 @@ from tqdm import tqdm
 import logging
 import sys
 from datasets import load_dataset
+improt RAG as rag
 
 choices = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"]
 max_model_length = 4096
