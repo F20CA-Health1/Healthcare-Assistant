@@ -22,8 +22,7 @@ data = pd.read_json('RAG/nhs_illnesses_structured.json', orient='index')
 data['summary'] = ''
 for i in range(len(data)):
     prompt = data.iloc[i]['whole_page']
-    summary = prompt_model(prompt)
-    data.iloc[i]['summary'] = summary
+    data.at[i, 'summary'] = prompt_model(prompt)
     print(f'Processed {i+1} out of {len(data)}')
-
+    
 data.to_json('RAG/nhs_illnesses_structured_with_summary.json', orient='index') 
