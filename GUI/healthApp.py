@@ -1,5 +1,6 @@
 import os
 import sys
+from threading import Thread
 from groq import Groq
 import panel as pn
 from time import sleep
@@ -10,8 +11,10 @@ import pygame as pg
 import sys
 sys.path.append('./TTS')
 sys.path.append('./RAG')
+sys.path.append('./LLM')
 import tts as tts
 from RAGComponent import RAGModule
+from LLMComponent import LLMModule
 
 
 import sounddevice as sd
@@ -26,10 +29,15 @@ isRag = True
 isNarrator = False
 audio_queue = queue.Queue()
 rag_module = RAGModule('./data')
+llm = LLMModule('qwen2.5:0.5b', None, 'http://localhost:11434/v1')
 
 from openai import AzureOpenAI
 
 
+def pretty_print_contents(input: str):
+    print('='*25 + " CONTEXT " + '='*25)
+    print(input)
+    print('='*59)
 
 # Function that can deal with the response from the chat bot
 def get_response(contents, user, instance):
@@ -37,22 +45,22 @@ def get_response(contents, user, instance):
     # response = The response to be sent back to the user
     if isRag and isLocal:
         contents = rag_module.prepare_prompt(contents)
-        response = "Replace this with your RAG response."
+        response = llm.make_query(contents, True, debug=True)
     elif isRag and not isLocal:
         contents = rag_module.prepare_prompt(contents)
         response = "Replace this with your RAG response with a non local model."
     elif isLocal:
-        response = "Replace this with your online model response."
+        response = llm.make_query(contents, True, debug=True)
     else:
         response = "Replace this with your local model response."
     
     if isNarrator:
-        tts.text_to_speech(response)
+        Thread(target=lambda: tts.text_to_speech(response)).start()
         
     
     for index in range(len(response)):
         yield response[0:index+1]
-        sleep(0.03)
+        sleep(0.001)
     return response
 
 def audio_callback(indata, frames, time, status, something):
@@ -130,7 +138,7 @@ def stop_recording(instance):
     if (isLocal):
         speech=r.recognize_whisper(audio, language="english")
     else:
-        os.environ["GROQ_API_KEY"] = os.getenv("GROQ")
+        os.environ["GROQ_API_KEY"] = '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'
         
         speech=r.recognize_groq(audio, model="whisper-large-v3-turbo")
     
