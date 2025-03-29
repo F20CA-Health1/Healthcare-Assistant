@@ -14,15 +14,15 @@ def calculate_metrics(true_labels_path: str, predictions_path: str) -> Tuple[flo
         Tuple[float, float]: (accuracy, f1_score)
     """
     # Read the true labels
-    true_labels = []
-    with open(true_labels_path, 'r') as f:
+    predictions = []
+    with open(predictions_path, 'r') as f:
         pred_data = json.load(f)
         for value in pred_data.values():
             predictions.append(value)
 
     # Read the predictions
-    predictions = []
-    with open(predictions_path, 'r') as f:
+    true_labels = []
+    with open(true_labels_path, 'r') as f:
         dev_data = json.load(f)
         for category in dev_data.values():
             for item in category:
