@@ -1,0 +1,16 @@
+------------ User ------------
+hello
+------------ Response ------------
+Hello! How can I assist you today?
+------------ User ------------
+hello
+------------ Response ------------
+Hello! How can I assist you today? If you have any medical questions or concerns, feel free to ask.
+------------ User ------------
+hello
+------------ Response ------------
+Hello! How can I assist you today? If you have any medical questions or concerns, feel free to ask.
+------------ User ------------
+hello
+------------ Response ------------
+Hello! How can I assist you today? If you have any medical questions or concerns, feel free to ask.
