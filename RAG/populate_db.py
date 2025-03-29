@@ -2,7 +2,7 @@ import pandas as pd
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../RAG')))
-from RAG.RAGComponent import RAGModule
+from RAGComponent import RAGModule
 
 if __name__ == "__main__":
     rag = RAGModule('./data/')
@@ -13,4 +13,4 @@ if __name__ == "__main__":
         rag.add_to_datastore(page, title)
         print(f'Added: {title}')
     print('DONE')
-        
+    
