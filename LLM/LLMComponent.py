@@ -1,9 +1,14 @@
 from pydantic_ai import Agent
 from pydantic_ai.providers.openai import OpenAIProvider
 from pydantic_ai.models.openai import OpenAIModel
+from openai import AzureOpenAI
+
+OPENAI_KEY = ''
+AZURE_ENDPOINT = ''
+AZURE_MODEL_NAME = 'gpt-35-turbo'
 
 class LLMModule():
-    
+
     def __init__(self, model_name: str, api_key: str | None, base_url: str | None):
         self.set_model(model_name, api_key, base_url)
         self.last_response = None
@@ -35,11 +40,29 @@ class LLMModule():
             if debug:
                 print(self.last_response)
             return response.data
+        else:
+            gpt_35 = AzureOpenAI(
+            api_key = OPENAI_KEY,
+            api_version="2024-05-01-preview",
+            azure_endpoint = AZURE_ENDPOINT
+            )
+            messages = [
+                {"role": "user", "content": input}]
+
+            response = gpt_35.chat.completions.create(
+                model = AZURE_MODEL_NAME,
+                messages=messages,
+                temperature=0.3
+            )
+            return response.choices[0].message.content
+            # query to chatgpt 
+
+            pass
         
 if __name__ == "__main__":
     llm = LLMModule('llama2', None, 'http://localhost:11434/v1')
     while True:
-        response = llm.make_query(input('> '))
+        response = llm.make_query(input=input('> '), local=False, debug=True)
         print(response)
-        print(llm.last_response)
+        # print(llm.last_response)
 
